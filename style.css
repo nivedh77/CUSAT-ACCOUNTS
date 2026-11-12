@@ -1,0 +1,47 @@
+.form1{
+display: flex;
+align-items: center;
+
+
+}
+#dashboard{
+    display: flex;
+    justify-content: center;
+    
+}
+
+#main-event-manager {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 24px;
+}
+
+#event-form {
+    display: grid;
+    gap: 12px;
+}
+
+#event-form input,
+#event-form textarea,
+#event-form button {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 12px;
+    font: inherit;
+}
+
+#event-form textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+#event-form button {
+    cursor: pointer;
+}
+
+#event-list article {
+    margin-top: 16px;
+    padding: 16px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}

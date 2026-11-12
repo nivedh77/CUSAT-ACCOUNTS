@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CUCEK FINANCIAL REPORTS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+
+    <h2>CUCEK FINANCE PORTAL</h2>
+    <nav>
+        <a href="#">Dashboard</a>
+        <a href="#">Events</a>
+
+        <a href="#">Expenses</a>
+        <a href="#">Reports</a>
+    </nav>
+    <div id="dashboard">
+        <h1>Financial Overview</h1>
+        <p>Track college event funds,income and expenses</p>
+   </div>
+                <h3>Portal Access</h3>
+                
+                <form id="loginForm">
+                    <div class="form1">
+                        <label for="userRole">Select Role:</label>
+                        <select id="userRole" required>
+                            <option value="" disabled selected>-- Choose your role --</option>
+                            <option value="rep">Student Representative (Club / Committee / Union)</option>
+                            <option value="admin">Faculty Auditor / College Administrator</option>
+                        </select>
+                    </div>
+                    <div class="form2">
+                        <label for="orgName">Organization / Committee Name:</label>
+                        <input type="text" id="orgName" placeholder="e.g. Arts Club, Tech Fest, College Union" required>
+                    </div>
+                    <div class="form3">
+                        <label for="userEmail">Official Email / ID:</label>
+                        <input type="email" id="userEmail" placeholder="student@cucek.in" required>
+                    </div>
+                    <div class="form4">
+                        <label for="userPassword">Password:</label>
+                        <input type="password" id="userPassword" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="btn-submit">Sign In</button>
+                </form>
+                
+<section id="main-event-manager">
+    <h2>Create a Main Event</h2>
+
+    <form id="event-form">
+        <label for="event-name">Event name</label>
+        <input
+            type="text"
+            id="event-name"
+            name="name"
+            placeholder="e.g. Anchorage"
+            required
+        >
+
+        <label for="event-description">Description</label>
+        <textarea
+            id="event-description"
+            name="description"
+            placeholder="Describe the event"
+        ></textarea>
+
+        <label for="event-date">Event date</label>
+        <input
+            type="date"
+            id="event-date"
+            name="event_date"
+            required
+        >
+
+        <button type="submit">Create Event</button>
+    </form>
+
+    <p id="event-message" role="status"></p>
+
+    <h2>Saved Main Events</h2>
+    <div id="event-list">
+        <p>Loading events...</p>
+    </div>
+</section>
+
+<script>
+    const eventForm = document.getElementById("event-form");
+    const eventList = document.getElementById("event-list");
+    const eventMessage = document.getElementById("event-message");
+
+    async function loadEvents() {
+        try {
+            const response = await fetch("/api/main-events");
+
+            if (!response.ok) {
+                throw new Error("Could not load events.");
+            }
+
+            const events = await response.json();
+            eventList.replaceChildren();
+
+            if (events.length === 0) {
+                eventList.textContent = "No events created yet.";
+                return;
+            }
+
+            for (const event of events) {
+                const card = document.createElement("article");
+                const title = document.createElement("h3");
+                const description = document.createElement("p");
+                const date = document.createElement("p");
+
+                title.textContent = event.name;
+                description.textContent =
+                    event.description || "No description provided.";
+                date.textContent = "Date: " + event.event_date;
+
+                card.append(title, description, date);
+                eventList.appendChild(card);
+            }
+        } catch (error) {
+            eventList.textContent = error.message;
+        }
+    }
+
+    eventForm.addEventListener("submit", async function (event) {
+        event.preventDefault();
+        eventMessage.textContent = "Saving event...";
+
+        const formData = new FormData(eventForm);
+
+        const eventData = {
+            name: formData.get("name"),
+            description: formData.get("description"),
+            event_date: formData.get("event_date")
+        };
+
+        try {
+            const response = await fetch("/api/main-events", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(eventData)
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                throw new Error(result.error || "Failed to save event.");
+            }
+
+            eventMessage.textContent = result.message;
+            eventForm.reset();
+            await loadEvents();
+        } catch (error) {
+            eventMessage.textContent = error.message;
+        }
+    });
+
+    loadEvents();
+</script>
+
+</body>
+
+</html>
