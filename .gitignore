@@ -1,18 +1,11 @@
-# Virtual environment
-venv/
+﻿venv/
 .venv/
-env/
-
-# Python cache
 __pycache__/
-*.py[cod]
-*$py.class
-
-# Environment variables & local configs
+*.pyc
 .env
-.env.local
-
-# OS files
-Thumbs.db
-.DS_Store
-
+database/*.db
+.zencoder/
+skills/
+data/skills/
+skills-lock.json
+.agents/

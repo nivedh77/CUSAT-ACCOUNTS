@@ -4,30 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CUCEK FINANCIAL REPORTS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+     rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="bg-light">
 
 
-    <h2>CUCEK FINANCE PORTAL</h2>
-    <nav>
-        <a href="#">Dashboard</a>
-        <a href="#">Events</a>
+    <header class="container py-3">
+        <h2 class="mb-3">CUCEK FINANCE PORTAL</h2>
+        <nav class="nav nav-pills mb-3">
+            <a class="nav-link active" href="#">Dashboard</a>
+            <a class="nav-link" href="#">Events</a>
 
-        <a href="#">Expenses</a>
-        <a href="#">Reports</a>
-    </nav>
-    <div id="dashboard">
-        <h1>Financial Overview</h1>
-        <p>Track college event funds,income and expenses</p>
+            <a class="nav-link" href="#">Expenses</a>
+            <a class="nav-link" href="#">Reports</a>
+        </nav>
+    </header>
+    <main class="container">
+    <div id="dashboard" class="bg-white rounded-3 shadow-sm p-4 mb-4">
+        <div>
+            <h1>Financial Overview</h1>
+            <p class="mb-0">Track college event funds, income and expenses</p>
+        </div>
    </div>
-                <h3>Portal Access</h3>
+                <h3 class="text-center">Portal Access</h3>
                 
-                <form id="loginForm">
+                <form id="loginForm" class="mx-auto mb-4" style="max-width: 700px;">
                     <div class="form1">
                         <label for="userRole">Select Role:</label>
-                        <select id="userRole" required>
+                        <select id="userRole" class="form-select" required>
                             <option value="" disabled selected>-- Choose your role --</option>
                             <option value="rep">Student Representative (Club / Committee / Union)</option>
                             <option value="admin">Faculty Auditor / College Administrator</option>
@@ -35,20 +42,21 @@
                     </div>
                     <div class="form2">
                         <label for="orgName">Organization / Committee Name:</label>
-                        <input type="text" id="orgName" placeholder="e.g. Arts Club, Tech Fest, College Union" required>
+                        <input type="text" id="orgName" class="form-control" placeholder="e.g. Arts Club, Tech Fest, College Union" required>
                     </div>
                     <div class="form3">
                         <label for="userEmail">Official Email / ID:</label>
-                        <input type="email" id="userEmail" placeholder="student@cucek.in" required>
+                        <input type="email" id="userEmail" class="form-control" placeholder="student@cucek.in" required>
                     </div>
                     <div class="form4">
                         <label for="userPassword">Password:</label>
-                        <input type="password" id="userPassword" placeholder="••••••••" required>
+                        <input type="password" id="userPassword" class="form-control" placeholder="••••••••" required>
                     </div>
-                    <button type="submit" class="btn-submit">Sign In</button>
+                    <button type="submit" class="btn btn-primary w-100">Sign In</button>
                 </form>
                 
-<section id="main-event-manager">
+<section id="main-event-manager" class="card shadow-sm mb-4">
+    <div class="card-body">
     <h2>Create a Main Event</h2>
 
     <form id="event-form">
@@ -57,6 +65,7 @@
             type="text"
             id="event-name"
             name="name"
+            class="form-control"
             placeholder="e.g. Anchorage"
             required
         >
@@ -65,6 +74,7 @@
         <textarea
             id="event-description"
             name="description"
+            class="form-control"
             placeholder="Describe the event"
         ></textarea>
 
@@ -73,10 +83,11 @@
             type="date"
             id="event-date"
             name="event_date"
+            class="form-control"
             required
         >
 
-        <button type="submit">Create Event</button>
+        <button type="submit" class="btn btn-primary">Create Event</button>
     </form>
 
     <p id="event-message" role="status"></p>
@@ -85,9 +96,147 @@
     <div id="event-list">
         <p>Loading events...</p>
     </div>
+    </div>
 </section>
+<section id="sub-event-manager" class="card shadow-sm mb-4">
+    <div class="card-body">
 
+    <h2>Create a Sub-event</h2>
+
+    <form id="sub-event-form">
+
+        <label for="parent-event">Select Main Event</label>
+        <select id="parent-event" class="form-select" required>
+            <option value="">Choose a main event</option>
+        </select>
+
+        <label for="sub-event-name">Sub-event Name</label>
+        <input
+            type="text"
+            id="sub-event-name"
+            class="form-control"
+            placeholder="e.g. Sooraj Santhosh Live"
+            required
+        >
+
+        <label for="sub-event-department">Department</label>
+        <input
+            type="text"
+            id="sub-event-department"
+            class="form-control"
+            value="CUCEK"
+            required
+        >
+
+        <label for="sub-event-date">Event Date</label>
+        <input
+            type="date"
+            id="sub-event-date"
+            class="form-control"
+            required
+        >
+
+        <button type="submit" class="btn btn-primary">Create Sub-event</button>
+
+    </form>
+
+    <p id="sub-event-message"></p>
+
+    <h2>Sub-events</h2>
+    <div id="sub-event-list">
+        Select a main event to see its sub-events.
+    </div>
+
+    </div>
+</section>
+<section id="financial-manager" class="card shadow-sm mb-4">
+    <div class="card-body">
+
+    <h2>Financial Management</h2>
+
+    <form id="financial-form">
+
+        <label for="finance-event">Select Sub-event</label>
+        <select id="finance-event" class="form-select" required>
+            <option value="">Choose a sub-event</option>
+        </select>
+
+        <label for="record-type">Transaction Type</label>
+        <select id="record-type" class="form-select" required>
+            <option value="">Choose type</option>
+            <option value="Income">Income</option>
+            <option value="Expense">Expense</option>
+        </select>
+
+        <label for="finance-category">Category</label>
+        <input
+            type="text"
+            id="finance-category"
+            class="form-control"
+            placeholder="e.g. Sponsorship"
+            required
+        >
+
+        <label for="finance-description">Description</label>
+        <textarea
+            id="finance-description"
+            class="form-control"
+            placeholder="Transaction details"
+        ></textarea>
+
+        <label for="finance-amount">Amount (₹)</label>
+        <input
+            type="number"
+            id="finance-amount"
+            class="form-control"
+            min="0.01"
+            step="0.01"
+            required
+        >
+
+        <label for="transaction-date">Transaction Date</label>
+        <input
+            type="date"
+            id="transaction-date"
+            class="form-control"
+            required
+        >
+
+        <button type="submit" class="btn btn-primary">Save Transaction</button>
+
+    </form>
+
+   <p id="finance-message" role="status"></p>
+
+
+<div id="financial-summary" class="row g-3">
+
+    <div class="summary-card col-md-4 card text-center p-3">
+        <h3>Total Income</h3>
+        <p id="total-income">₹0</p>
+    </div>
+
+    <div class="summary-card">
+        <h3>Total Expenses</h3>
+        <p id="total-expenses">₹0</p>
+    </div>
+
+    <div class="summary-card">
+        <h3>Remaining Balance</h3>
+        <p id="remaining-balance">₹0</p>
+    </div>
+
+</div>
+
+<h2>Financial Records</h2>
+<div id="financial-record-list"></div>
+    </div>
+</section>
+    </main>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 <script>
+
     const eventForm = document.getElementById("event-form");
     const eventList = document.getElementById("event-list");
     const eventMessage = document.getElementById("event-message");
@@ -163,6 +312,301 @@
     });
 
     loadEvents();
+    const subEventForm = document.getElementById("sub-event-form");
+
+const parentEvent = document.getElementById("parent-event");
+
+const subEventList = document.getElementById("sub-event-list");
+
+const subEventMessage = document.getElementById("sub-event-message");
+
+
+
+async function loadParentEvents() {
+
+    const response = await fetch("/api/main-events");
+
+    const events = await response.json();
+
+    parentEvent.replaceChildren(
+        new Option("Choose a main event", "")
+    );
+
+    events.forEach(function(event) {
+
+        const option = new Option(event.name, event.id);
+
+        parentEvent.add(option);
+
+    });
+}
+
+
+
+async function loadSubEvents() {
+
+    const mainEventId = parentEvent.value;
+
+    if (!mainEventId) {
+        subEventList.textContent = "Select a main event.";
+        return;
+    }
+
+    const response = await fetch(
+        "/api/sub-events?main_event_id=" +
+        encodeURIComponent(mainEventId)
+    );
+
+    const events = await response.json();
+
+    subEventList.replaceChildren();
+
+    if (events.length === 0) {
+        subEventList.textContent = "No sub-events yet.";
+        return;
+    }
+
+    events.forEach(function(event) {
+
+        const card = document.createElement("article");
+
+        const title = document.createElement("h3");
+
+        title.textContent = event.event_name;
+
+        const department = document.createElement("p");
+
+        department.textContent = "Department: " + event.department;
+
+        const date = document.createElement("p");
+
+        date.textContent = "Date: " + event.event_date;
+
+        const status = document.createElement("p");
+
+        status.textContent = "Status: " + event.status;
+
+        card.append(title, department, date, status);
+
+        subEventList.appendChild(card);
+
+    });
+
+}
+
+
+
+parentEvent.addEventListener("change", loadSubEvents);
+
+
+
+subEventForm.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const selectedMainEventId = parentEvent.value;
+
+    const subEventData = {
+
+        main_event_id: selectedMainEventId,
+
+        event_name: document.getElementById("sub-event-name").value,
+
+        department: document.getElementById("sub-event-department").value,
+
+        event_date: document.getElementById("sub-event-date").value
+
+    };
+
+    try {
+
+        const response = await fetch("/api/sub-events", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify(subEventData)
+
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.error || "Failed to create sub-event.");
+        }
+
+        subEventMessage.textContent = result.message;
+
+        subEventForm.reset();
+
+        parentEvent.value = selectedMainEventId;
+
+        document.getElementById("sub-event-department").value = "CUCEK";
+
+        await loadSubEvents();
+
+    } catch (error) {
+
+        subEventMessage.textContent = error.message;
+
+    }
+
+});
+
+
+// Load main events when the page opens
+loadParentEvents();
+const financialForm = document.getElementById("financial-form");
+const financeEvent = document.getElementById("finance-event");
+const financialList = document.getElementById("financial-record-list");
+const financeMessage = document.getElementById("finance-message");
+
+
+// Load sub-events into the dropdown
+async function loadFinanceEvents() {
+
+    const response = await fetch("/api/main-events");
+    const mainEvents = await response.json();
+
+    financeEvent.replaceChildren(
+        new Option("Choose a sub-event", "")
+    );
+
+    for (const mainEvent of mainEvents) {
+
+        const subResponse = await fetch(
+            "/api/sub-events?main_event_id=" + mainEvent.id
+        );
+
+        const subEvents = await subResponse.json();
+
+        for (const subEvent of subEvents) {
+
+            const option = new Option(
+                mainEvent.name + " - " + subEvent.event_name,
+                subEvent.id
+            );
+
+            financeEvent.add(option);
+        }
+    }
+}
+
+
+// Load financial records
+async function loadFinancialRecords() {
+
+    const eventId = financeEvent.value;
+
+    if (!eventId) {
+        financialList.textContent = "Select a sub-event.";
+        return;
+    }
+
+    const response = await fetch(
+        "/api/financial-records?event_id=" + eventId
+    );
+
+    const records = await response.json();
+
+    financialList.replaceChildren();
+
+    if (records.length === 0) {
+        financialList.textContent = "No financial records yet.";
+        return;
+    }
+
+    for (const record of records) {
+
+        const card = document.createElement("article");
+
+        const category = document.createElement("h3");
+        category.textContent = record.category;
+
+        const type = document.createElement("p");
+        type.textContent = record.record_type;
+
+        const amount = document.createElement("p");
+        amount.textContent = "₹" + Number(record.amount).toFixed(2);
+
+        const description = document.createElement("p");
+        description.textContent = record.description || "No description";
+
+        card.append(category, type, amount, description);
+
+        financialList.appendChild(card);
+    }
+}
+
+
+
+financeEvent.addEventListener("change", loadFinancialRecords);
+
+
+
+financialForm.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const transaction = {
+
+        event_id: financeEvent.value,
+
+        record_type: document.getElementById("record-type").value,
+
+        category: document.getElementById("finance-category").value,
+
+        description: document.getElementById("finance-description").value,
+
+        amount: document.getElementById("finance-amount").value,
+
+        transaction_date: document.getElementById("transaction-date").value
+
+    };
+
+    try {
+
+        const response = await fetch("/api/financial-records", {
+
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify(transaction)
+
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.error || "Transaction failed.");
+        }
+
+        financeMessage.textContent = result.message;
+
+        financialForm.reset();
+
+        financeEvent.value = transaction.event_id;
+
+        await loadFinancialRecords();
+
+    } catch (error) {
+
+        financeMessage.textContent = error.message;
+
+    }
+
+});
+
+
+
+loadFinanceEvents();
+
 </script>
 
 </body>

@@ -24,3 +24,39 @@ with sqlite3.connect(DB_PATH)as connection:
         "SELECT name FROM sqlite_master WHERE type='table'"
     )    
     print("TABLES FOUND:",result.fetchall())
+with sqlite3.connect(DB_PATH) as connection:
+
+    cursor = connection.execute(
+        "PRAGMA table_info(events)"
+    )
+
+    columns = cursor.fetchall()
+
+    print("EVENTS TABLE STRUCTURE:")
+
+for column in columns:
+    print("Column name:", column[1])   
+with sqlite3.connect(DB_PATH) as connection:
+
+    tables = connection.execute(
+        "SELECT name FROM sqlite_master WHERE type='table'"
+    ).fetchall()
+
+    print("DATABASE TABLES:")
+
+    for table in tables:
+        print(table[0])
+    
+    connection.commit()
+
+print("Migration successful: event_name column added.")
+with sqlite3.connect(DB_PATH) as connection:
+
+    records = connection.execute(
+        "SELECT * FROM financial_records"
+    ).fetchall()
+
+    print("\nALL FINANCIAL RECORDS:")
+
+    for record in records:
+        print(record)

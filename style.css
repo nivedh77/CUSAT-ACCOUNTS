@@ -10,6 +10,19 @@ align-items: center;
     
 }
 
+#loginForm > div {
+    display: grid;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+#main-event-manager,
+#sub-event-manager,
+#financial-manager {
+    max-width: 700px;
+    width: 100%;
+}
+
 #main-event-manager {
     max-width: 700px;
     margin: 40px auto;
@@ -41,6 +54,59 @@ align-items: center;
 
 #event-list article {
     margin-top: 16px;
+    padding: 16px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+#sub-event-manager {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 24px;
+}
+
+#sub-event-form {
+    display: grid;
+    gap: 12px;
+}
+
+#sub-event-form input,
+#sub-event-form select,
+#sub-event-form button {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    font: inherit;
+}
+
+#sub-event-list article {
+    margin-top: 16px;
+    padding: 16px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+#financial-manager {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 24px;
+}
+
+#financial-form {
+    display: grid;
+    gap: 12px;
+}
+
+#financial-form input,
+#financial-form select,
+#financial-form textarea,
+#financial-form button {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 12px;
+    font: inherit;
+}
+
+#financial-record-list article {
+    margin-top: 15px;
     padding: 16px;
     border: 1px solid #ccc;
     border-radius: 10px;
